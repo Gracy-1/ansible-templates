@@ -1,5 +1,5 @@
 - name: Gather System Information
   hosts: all
   tasks:
-    - name: Gather facts
-      gather_facts: yes
+   - name: Gather facts
+     gather_facts: yes
