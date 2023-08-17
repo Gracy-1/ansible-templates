@@ -1,5 +1,5 @@
 - name: Gather System Information
-  hosts: target_vm
+  hosts: all
   tasks:
     - name: Gather facts
       gather_facts: yes
