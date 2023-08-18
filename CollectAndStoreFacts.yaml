@@ -15,6 +15,9 @@
           all_ipv6_addresses: "{{ ansible_facts.all_ipv6_addresses }}"
           hostname: "{{ ansible_facts.hostname }}"
     - name: Create Facts JSON File
-      local_action: copy content="{{ selected_facts | to_nice_json }}" dest="/home/gracy/Documents/config-management/facts.json"
-      delegate_to: localhost
-      ansible_user: administrator
+      local_action:
+        module: copy
+        content: "{{ selected_facts | to_nice_json }}"
+        dest: "/home/gracy/Documents/config-management/facts.json"
+      ansible_user: gracy
+      
