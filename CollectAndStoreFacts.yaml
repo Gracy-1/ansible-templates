@@ -13,14 +13,14 @@
           hostname: "{{ ansible_facts.hostname }}"
       delegate_to: localhost
     - name: Create Facts JSON File
-      local_action: copy content="{{ selected_facts | to_nice_json }}" dest="./facts.json"
+      local_action: copy content="{{ selected_facts | to_nice_json }}" dest="/home/gracy/Documents/config-management/facts.json"
       delegate_to: localhost
     - name: Commit and Push Facts to Git Repository
       delegate_to: localhost
       run_once: true
       become: false
       command: >
-        bash -c "cd Home/Documents/config-management &&
+        bash -c "cd /home/gracy/Documents/config-management &&
                  git add facts.json &&
                  git commit -m 'Update facts' &&
                  git push origin master"
