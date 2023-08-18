@@ -1,5 +1,5 @@
 - name: Gather and Store Specific System Facts
-  hosts: my_vm
+  hosts: all
   gather_facts: yes
   tasks:
     - name: Display Facts
@@ -11,10 +11,9 @@
           ip4address: "{{ ansible_default_ipv4.address }}"
           ip6address: "{{ ansible_default_ipv6.address }}"
           hostname: "{{ ansible_hostname }}"
-          other_fact: "{{ ansible_facts.some_other_fact }}"
     - name: Commit and Push Facts to Git Repository
       ansible.builtin.git:
-        repo: /path/to/your/git/repo
+        repo: https://github.com/Gracy-1/ansible-templates.git
         dest: master
         src: facts.json
         force: yes
