@@ -17,3 +17,4 @@
     - name: Create Facts JSON File
       local_action: copy content="{{ selected_facts | to_nice_json }}" dest="/home/gracy/Documents/config-management/facts.json"
       delegate_to: localhost
+      ansible_user: administrator
