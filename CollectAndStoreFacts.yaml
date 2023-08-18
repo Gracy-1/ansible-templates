@@ -2,6 +2,9 @@
   hosts: all
   gather_facts: yes
   tasks:
+    - name: Debug Current User
+      debug:
+        var: ansible_user
     - name: Display Facts
       debug:
         var: ansible_facts
