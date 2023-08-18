@@ -1,0 +1,19 @@
+- name: Gather and Store Specific System Facts
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Display Facts
+      debug:
+        var: ansible_facts
+    - name: Store Specific Facts in File
+      set_fact:
+        selected_facts:
+          ip4address: "{{ ansible_facts.ansible_default_ipv4.address }}"
+          ip6address: "{{ ansible_facts.ansible_default_ipv6.address }}"
+          hostname: "{{ ansible_facts.ansible_hostname }}"
+      delegate_to: localhost
+    - name: Commit and Push Facts to Git Repository
+      local_action: shell git add facts.json && git commit -m "Update facts" && git push origin master
+      args:
+        chdir: https://github.com/Gracy-1/ansible-templates.git
+      delegate_to: localhost
