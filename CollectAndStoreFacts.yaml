@@ -20,7 +20,7 @@
       run_once: true
       become: false
       command: >
-        bash -c "cd /path/to/your/git/repo &&
+        bash -c "cd Home/Documents/config-management &&
                  git add facts.json &&
                  git commit -m 'Update facts' &&
                  git push origin master"
