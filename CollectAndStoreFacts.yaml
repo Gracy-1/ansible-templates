@@ -11,16 +11,6 @@
           all_ipv4_addresses: "{{ ansible_facts.all_ipv4_addresses }}"
           all_ipv6_addresses: "{{ ansible_facts.all_ipv6_addresses }}"
           hostname: "{{ ansible_facts.hostname }}"
-      delegate_to: localhost
     - name: Create Facts JSON File
       local_action: copy content="{{ selected_facts | to_nice_json }}" dest="/home/gracy/Documents/config-management/facts.json"
       delegate_to: localhost
-    - name: Commit and Push Facts to Git Repository
-      delegate_to: localhost
-      run_once: true
-      become: false
-      command: >
-        bash -c "cd /home/gracy/Documents/config-management &&
-                 git add facts.json &&
-                 git commit -m 'Update facts' &&
-                 git push origin master"
