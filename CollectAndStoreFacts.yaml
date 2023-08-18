@@ -8,9 +8,13 @@
     - name: Store Specific Facts in File
       set_fact:
         selected_facts:
-          ip4address: "{{ ansible_default_ipv4.address }}"
-          ip6address: "{{ ansible_default_ipv6.address }}"
-          hostname: "{{ ansible_hostname }}"
+          all_ipv4_addresses: "{{ ansible_facts.all_ipv4_addresses }}"
+          all_ipv6_addresses: "{{ ansible_facts.all_ipv6_addresses }}"
+          hostname: "{{ ansible_facts.hostname }}"
+      delegate_to: localhost
+    - name: Create Facts JSON File
+      local_action: copy content="{{ selected_facts | to_nice_json }}" dest="./facts.json"
+      delegate_to: localhost
     - name: Commit and Push Facts to Git Repository
       ansible.builtin.git:
         repo: https://github.com/Gracy-1/ansible-templates.git
