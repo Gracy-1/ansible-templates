@@ -1,5 +1,5 @@
 - name: Gather Configuration Details of VM
-  hosts: your_vm_alias  # This should match the alias of the VM in your Semaphore inventory
+  hosts: all  # This should match the alias of the VM in your Semaphore inventory
   gather_facts: yes    # This will gather facts about the target VM
 
   tasks:
@@ -9,30 +9,3 @@
     - name: Display System Facts
       debug:
         var: ansible_facts  # Display all gathered facts
-
-    - name: Collect Network Information
-      network_facts:      # This module gathers network-related facts
-        gather_subset:
-          - interfaces
-
-    - name: Display Network Facts
-      debug:
-        var: ansible_facts.network_interfaces
-
-    - name: Get Installed Packages (Linux)
-      package_facts:
-        manager: auto
-      when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] == 'Debian'
-
-    - name: Display Installed Packages
-      debug:
-        var: ansible_facts.packages
-
-    - name: Get Installed Packages (Windows)
-      win_package_facts:
-        gather_subset: all
-      when: ansible_facts['os_family'] == 'Windows'
-
-    - name: Display Installed Packages (Windows)
-      debug:
-        var: ansible_facts.installed_software
