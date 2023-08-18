@@ -16,8 +16,11 @@
       local_action: copy content="{{ selected_facts | to_nice_json }}" dest="./facts.json"
       delegate_to: localhost
     - name: Commit and Push Facts to Git Repository
-      ansible.builtin.git:
-        repo: https://github.com/Gracy-1/ansible-templates.git
-        dest: master
-        src: facts.json
-        force: yes
+      delegate_to: localhost
+      run_once: true
+      become: false
+      command: >
+        bash -c "cd /path/to/your/git/repo &&
+                 git add facts.json &&
+                 git commit -m 'Update facts' &&
+                 git push origin master"
