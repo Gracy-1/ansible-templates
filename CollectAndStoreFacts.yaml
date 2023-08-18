@@ -10,3 +10,11 @@
           hostname: "{{ ansible_facts.hostname }}"
     - name: Create Facts JSON File
       local_action: copy content="{{ selected_facts | to_nice_json }}" dest="/tmp/facts.json"
+- name: Fetch Facts JSON File
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Fetch Facts JSON File
+      ansible.builtin.get_url:
+        url: "scp://remote_user@10.100.101.176:/tmp/facts.json"
+        dest: "/home/gracy/Documents/config-management/facts.json"
