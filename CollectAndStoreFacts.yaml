@@ -19,5 +19,5 @@
         module: copy
         content: "{{ selected_facts | to_nice_json }}"
         dest: "/home/gracy/Documents/config-management/facts.json"
-      ansible_user: gracy
+      ansible_user: administrator
       
