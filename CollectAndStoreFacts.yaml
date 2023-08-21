@@ -1,5 +1,6 @@
+---
 - name: Gather and Store System Info
-  hosts: all  # Replace with the appropriate inventory group name from Semaphore
+  hosts: all
   gather_facts: yes
 
   tasks:
@@ -12,12 +13,16 @@
         content: |
           ansible_facts:
             all_ipv4_addresses:
-            {% for ip in ansible_facts['ansible_all_ipv4_addresses'] %}
-            - {{ ip }}
+            {% for host in ansible_facts %}
+              {% for ip in host.ansible_all_ipv4_addresses %}
+              - {{ ip }}
+              {% endfor %}
             {% endfor %}
             all_ipv6_addresses:
-            {% for ip in ansible_facts['ansible_all_ipv6_addresses'] %}
-            - {{ ip }}
+            {% for host in ansible_facts %}
+              {% for ip in host.ansible_all_ipv6_addresses %}
+              - {{ ip }}
+              {% endfor %}
             {% endfor %}
           hostname: {{ ansible_facts['ansible_hostname'] }}
         dest: /home/gracy/Documents/config-management/systemInfo_bkp.yaml  # Update this path as needed
