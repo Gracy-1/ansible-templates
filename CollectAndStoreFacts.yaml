@@ -17,3 +17,4 @@
           ansible_facts:
           hostname: {{ ansible_facts['hostname'] }}
         dest: ~/systemInfo_bkp.yaml  # Update this path as needed
+      become: no
