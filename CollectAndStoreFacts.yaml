@@ -7,6 +7,9 @@
       setup:
       
     - name: Store facts in a local file
-      copy: content="{{ hostvars[inventory_hostname].ansible_facts }}" dest="/etc/ansible/{{ inventory_hostname }}_facts.json"
+      copy:
+        content: "{{ hostvars[inventory_hostname].ansible_facts }}"
+        dest: "{{ semaphore_workspace }}/facts/{{ inventory_hostname }}_facts.json"
       delegate_to: localhost
+
 
