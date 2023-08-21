@@ -12,6 +12,6 @@
         content: |
           ansible_facts:
           hostname: {{ ansible_facts['hostname'] }}
-          dest: ~/Desktop/ans/info.yaml
+        dest: ~/Desktop/ans/info.yaml
       delegate_to: localhost
 
