@@ -12,5 +12,5 @@
         module: copy
         content: |
           ansible_facts:
-          hostname: {{ ansible_facts['ansible_hostname'] }}
+          hostname: {{ ansible_facts['hostname'] }}
         dest: /home/gracy/Documents/config-management/systemInfo_bkp.yaml  # Update this path as needed
