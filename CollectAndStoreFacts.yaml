@@ -1,20 +1,23 @@
-- name: Gather and Store Specific System Facts
+- name: Gather and Store System Info
   hosts: all
   gather_facts: yes
+
   tasks:
-    - name: Store Specific Facts in File
-      set_fact:
-        selected_facts:
-          all_ipv4_addresses: "{{ ansible_facts.all_ipv4_addresses }}"
-          all_ipv6_addresses: "{{ ansible_facts.all_ipv6_addresses }}"
-          hostname: "{{ ansible_facts.hostname }}"
-    - name: Create Facts JSON File
-      local_action: copy content="{{ selected_facts | to_nice_json }}" dest="/tmp/facts.json"
-- name: Fetch Facts JSON File
-  hosts: localhost
-  gather_facts: no
-  tasks:
-    - name: Fetch Facts JSON File
-      ansible.builtin.get_url:
-        url: "scp://remote_user@10.100.101.176:/tmp/facts.json"
-        dest: "/home/gracy/Documents/config-management/facts.json"
+    - name: Gather system facts from remote node
+      setup:
+        
+    - name: Store gathered facts locally
+      local_action:
+        module: copy
+        content: |
+          ansible_facts:
+            all_ipv4_addresses:
+            {% for ip in ansible_facts['ansible_all_ipv4_addresses'] %}
+            - {{ ip }}
+            {% endfor %}
+            all_ipv6_addresses:
+            {% for ip in ansible_facts['ansible_all_ipv6_addresses'] %}
+            - {{ ip }}
+            {% endfor %}
+          hostname: {{ ansible_facts['ansible_hostname'] }}
+        dest: /home/gracy/Documents/config-management/systemInfo_bkp.yaml
