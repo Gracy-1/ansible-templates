@@ -12,5 +12,5 @@
         content: |
           ansible_facts:
           hostname: {{ ansible_facts['hostname'] }}
-        dest: /etc/ansible/info.txt  # Update this path as needed
+        dest: /etc/info.txt  # Update this path as needed
       delegate_to: localhost   
