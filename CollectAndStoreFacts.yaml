@@ -12,9 +12,4 @@
         content: |
           ansible_facts:
           hostname: {{ ansible_facts['hostname'] }}
-        dest: /tmp/systemInfo_bkp.yaml  # Update this path as needed
-      become: yes
-
-    - name: Display message about file creation
-      debug:
-        msg: "The systemInfo_bkp.yaml file has been created in /tmp/"
+        dest: /home/gracy/Documents/config-management/info.yaml  # Update this path as needed
