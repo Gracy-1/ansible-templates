@@ -1,7 +1,7 @@
 - name: Gather and Store System Info
   hosts: all
   gather_facts: yes
-  remote_user: gracy
+  remote_user: administrator
 
   tasks:
     - name: Gather system facts from remote node
