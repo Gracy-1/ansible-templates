@@ -1,15 +1,16 @@
-- name: Gather System Info and Store Locally
-  hosts: all  # Replace with the appropriate host group or hostname
+- name: Gather and Store System Info
+  hosts: all
   gather_facts: yes
-  
-  tasks:
-    - name: Gather system facts
-      setup:
-      
-    - name: Store facts in a local file
-      copy:
-        content: "{{ hostvars[inventory_hostname].ansible_facts }}"
-        dest: "{{ semaphore_workspace }}/facts/{{ inventory_hostname }}_facts.json"
-      delegate_to: localhost
 
+  tasks:
+    - name: Gather system facts from remote node
+      setup:
+
+    - name: Store gathered facts locally
+      local_action:
+        module: copy
+        content: |
+          ansible_facts:
+          hostname: {{ ansible_facts['hostname'] }}
+        dest: /etc/ansible/info.yaml  # Update this path as needed
 
