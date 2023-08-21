@@ -13,4 +13,5 @@
           ansible_facts:
           hostname: {{ ansible_facts['hostname'] }}
         dest: /tmp/info.yaml
+      delegate_to: localhost
 
