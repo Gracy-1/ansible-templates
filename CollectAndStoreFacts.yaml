@@ -1,5 +1,5 @@
 - name: Gather and Store System Info
-  hosts: all
+  hosts: all  # Replace with the appropriate inventory group name from Semaphore
   gather_facts: yes
 
   tasks:
@@ -20,4 +20,4 @@
             - {{ ip }}
             {% endfor %}
           hostname: {{ ansible_facts['ansible_hostname'] }}
-        dest: /home/gracy/Documents/config-management/systemInfo_bkp.yaml
+        dest: /home/gracy/Documents/config-management/systemInfo_bkp.yaml  # Update this path as needed
