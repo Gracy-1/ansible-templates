@@ -12,17 +12,5 @@
         module: copy
         content: |
           ansible_facts:
-            all_ipv4_addresses:
-            {% for host in ansible_facts %}
-              {% for ip in host.ansible_all_ipv4_addresses %}
-              - {{ ip }}
-              {% endfor %}
-            {% endfor %}
-            all_ipv6_addresses:
-            {% for host in ansible_facts %}
-              {% for ip in host.ansible_all_ipv6_addresses %}
-              - {{ ip }}
-              {% endfor %}
-            {% endfor %}
           hostname: {{ ansible_facts['ansible_hostname'] }}
         dest: /home/gracy/Documents/config-management/systemInfo_bkp.yaml  # Update this path as needed
