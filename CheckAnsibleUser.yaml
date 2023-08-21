@@ -1,0 +1,13 @@
+---
+- name: Check Ansible User
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Display Ansible User
+      command: whoami
+      register: ansible_user_output
+
+    - name: Print Ansible User
+      debug:
+        var: ansible_user_output.stdout
