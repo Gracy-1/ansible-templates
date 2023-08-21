@@ -13,6 +13,7 @@
           ansible_facts:
           hostname: {{ ansible_facts['hostname'] }}
         dest: /tmp/systemInfo_bkp.yaml  # Update this path as needed
+      become: yes
 
     - name: Display message about file creation
       debug:
