@@ -1,22 +1,12 @@
-- name: Gather and Store System Info
-  hosts: all
+- name: Gather System Info and Store Locally
+  hosts: all  # Replace with the appropriate host group or hostname
   gather_facts: yes
-
+  
   tasks:
-    - name: Gather system facts from remote node
+    - name: Gather system facts
       setup:
-
-    - name: Create destination directory if it doesn't exist
-      local_action:
-        module: file
-        path: /root/etc
-        state: directory
-
-    - name: Store gathered facts locally
-      local_action:
-        module: copy
-        content: |
-          ansible_facts:
-            hostname: {{ ansible_facts['hostname'] }}
-        dest: /root/etc/info.txt
+      
+    - name: Store facts in a local file
+      copy: content="{{ hostvars[inventory_hostname].ansible_facts }}" dest="/etc/ansible/{{ inventory_hostname }}_facts.json"
       delegate_to: localhost
+
