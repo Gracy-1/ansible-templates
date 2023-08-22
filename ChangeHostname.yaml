@@ -3,5 +3,6 @@
   become: true                # This allows running tasks with root privileges
   tasks:
     - name: Change Hostname
-      hostname:
-        name: IND-STL-ANALYTICS-APP4    # Replace with the new hostname you want to set
+      ansible.builtin.hostname:
+        name: "IND-STL-ANALYTICS-APP4"
+      become: true
