@@ -1,0 +1,13 @@
+- name: Gather System Info and Store in File
+  hosts: all
+  become: true
+  gather_facts: yes
+  tasks:
+    - name: Gather system facts
+      ansible.builtin.setup:
+
+    - name: Create directory if it doesn't exist
+      ansible.builtin.file:
+        path: "/etc/Info-backup"
+        state: directory
+        mode: '0755'
