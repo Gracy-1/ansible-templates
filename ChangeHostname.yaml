@@ -1,12 +1,13 @@
 - name: Change Hostname of Remote Machine
-  hosts: all  # Replace with the group name from your Semaphore inventory
-  become: true  # This allows running tasks with root privileges
+  hosts: all
+  become: true
+  become_user: administrator  # Replace with the sudo-enabled user's username
   tasks:
     - name: Update /etc/hostname
       lineinfile:
         path: /etc/hostname
         regexp: '^.*$'
-        line: 'IND-STL-ANALYTICS-APP4'  # Replace with the new hostname you want to set
+        line: 'IND-STL-ANALYTICS-APP3'  # Replace with the new hostname you want to set
       notify:
         - Restart Hostname Service
 
