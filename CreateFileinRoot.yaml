@@ -1,6 +1,7 @@
 - name: Gather System Info and Store in File
   hosts: all
   become: true
+  become_user: administrator
   gather_facts: yes
   tasks:
     - name: Gather system facts
