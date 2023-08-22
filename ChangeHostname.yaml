@@ -10,8 +10,8 @@
       notify:
         - Restart Hostname Service
 
-handlers:
-  - name: Restart Hostname Service
-    systemd:
-      name: systemd-hostnamed
-      state: restarted
+  handlers:
+    - name: Restart Hostname Service
+      systemd:
+        name: systemd-hostnamed
+        state: restarted
