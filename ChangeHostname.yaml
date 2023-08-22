@@ -4,4 +4,4 @@
   tasks:
     - name: Change Hostname
       hostname:
-        name: IND-STL-ANALYTICS-APP3NEW    # Replace with the new hostname you want to set
+        name: IND-STL-ANALYTICS-APP4    # Replace with the new hostname you want to set
