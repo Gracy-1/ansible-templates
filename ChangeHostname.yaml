@@ -1,8 +1,17 @@
-- name: Change Hostname of Remote VMs
-  hosts: all  # The group from your inventory in Semaphore
-  become: true                # This allows running tasks with root privileges
+- name: Change Hostname of Remote Machine
+  hosts: all  # Replace with the group name from your Semaphore inventory
+  become: true  # This allows running tasks with root privileges
   tasks:
-    - name: Change Hostname
-      ansible.builtin.hostname:
-        name: "IND-STL-ANALYTICS-APP4"
-      become: true
+    - name: Update /etc/hostname
+      lineinfile:
+        path: /etc/hostname
+        regexp: '^.*$'
+        line: 'IND-STL-ANALYTICS-APP4'  # Replace with the new hostname you want to set
+      notify:
+        - Restart Hostname Service
+
+handlers:
+  - name: Restart Hostname Service
+    systemd:
+      name: systemd-hostnamed
+      state: restarted
