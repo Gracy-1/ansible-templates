@@ -1,8 +1,18 @@
-- name: Change Hostname
+- name: Change Hostname of Remote Machine
   hosts: all
   become: true
-  become_user: administrator
+  become_user: root  # Replace with the sudo-enabled user's username
   tasks:
-    - name: Change hostname
-      hostname:
-        name: new_hostname
+    - name: Update /etc/hostname
+      lineinfile:
+        path: /etc/hostname
+        regexp: '^.*$'
+        line: 'IND-STL-ANALYTIC-APP3'  # Replace with the new hostname you want to set
+      notify:
+        - Restart Hostname Service
+
+  handlers:
+    - name: Restart Hostname Service
+      systemd:
+        name: systemd-hostnamed
+        state: restarted
