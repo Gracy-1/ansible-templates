@@ -1,6 +1,7 @@
 - name: Change Hostname of Remote Machine
   hosts: all
   become: yes
+  become_user: administrator
   tasks:
     - name: Update /etc/hostname
       lineinfile:
