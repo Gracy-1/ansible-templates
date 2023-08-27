@@ -1,0 +1,22 @@
+- name: Perform Configuration Changes
+  hosts: servers
+  become: yes
+
+  tasks:
+    - name: Backup old SSH config
+      command: cp /etc/ssh/sshd_config /etc/ssh/sshd_config.old
+      changed_when: false
+
+    - name: Modify SSH config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+      notify:
+        - Restart SSH Service
+
+  handlers:
+    - name: Restart SSH Service
+      service:
+        name: ssh
+        state: restarted
