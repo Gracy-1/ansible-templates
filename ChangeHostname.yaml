@@ -1,5 +1,7 @@
 - name: Change Hostname of Remote Machine
   hosts: all
+  become: yes
+  become_user: root
   tasks:
     - name: Display Ansible User
       debug:
