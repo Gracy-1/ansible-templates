@@ -1,22 +1,10 @@
-- name: Compare text files
+- name: Compare text files on remote server
   hosts: all
   tasks:
-    - name: Fetch file1.txt from remote VM
-      fetch:
-        src: Documents/Info-backup/system_info.txt
-        dest: /tmp/file1.txt
-        flat: yes
-
-    - name: Fetch file2.txt from remote VM
-      fetch:
-        src: Documents/Info-backup/system_info2.txt
-        dest: /tmp/file2.txt
-        flat: yes
-
     - name: Compare files
-      command: diff /tmp/file1.txt /tmp/file2.txt
+      command: diff /Documents/Info-backup/system_info.txt /Documents/Info-backup/system_info2.txt
       register: diff_output
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: Display differences
       debug:
